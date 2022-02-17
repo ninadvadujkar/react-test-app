@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { Counter } from './Counter';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const [counter, setCounter] = useState<number>(0);
+  const [name, setName] = useState<string>('');
+  const [addr, setAddr] = useState<string>('');
+
+  useEffect(() => {
+    console.log('.,.,....');
+    setName(`Ninad-${counter}`);
+  }, [counter, setName]);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     alert('HHHHH');
+  //   }, 1000);
+  // }, [name]);
+
+  const onClick = () => {
+    setCounter((prev) => {
+      console.log('prev', prev);
+      return prev + 1;
+    });
+  };
+
+  const onSet = () => {
+    setCounter(100);
+  };
+
+  return (<>
+    Current count: {counter}
+    <Counter counter={counter} onClick={onClick} onSet={onSet}>
+      <strong>Hoi!!!</strong>
+    </Counter>
+    {name}
+  </>);
 }
 
 export default App;
